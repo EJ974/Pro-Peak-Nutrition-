@@ -1,0 +1,23 @@
+.products {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  padding: 60px;
+}
+
+.product-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+}
+
+@media (max-width:768px){
+  .products {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,58 @@
+.cta {
+  position: relative;
+  padding: 100px 20px;
+  text-align: center;
+  overflow: hidden;
+  background: #0f0f0f;
+}
+
+/* fondo animado */
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,60,0,0.25), transparent 70%);
+  z-index: 0;
+}
+
+/* contenido */
+.cta-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+/* botón */
+.cta-btn {
+  background: linear-gradient(45deg, #ff3c00, #ff6a00);
+  border: none;
+  padding: 15px 35px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(255,60,0,0.3);
+}
+
+/* glow */
+.cta-btn:hover {
+  box-shadow: 0 0 25px rgba(255,60,0,0.8);
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .cta h2 {
+    font-size: 2rem;
+  }
+}

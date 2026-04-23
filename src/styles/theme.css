@@ -1,0 +1,237 @@
+/* =========================
+   🎨 VARIABLES GLOBALES
+========================= */
+:root {
+  --neon-primary: #ff3c00;
+  --neon-secondary: #ff6a00;
+  --neon-glow: rgba(255, 60, 0, 0.8);
+
+  --bg-dark: #0f0f0f;
+  --bg-soft: #1a1a1a;
+
+  --text-main: #ffffff;
+  --text-muted: #bdbdbd;
+
+  --card-bg: rgba(255,255,255,0.05);
+}
+
+
+/* =========================
+   🌍 RESET BÁSICO
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* =========================
+   🔤 TIPOGRAFÍA
+========================= */
+.neon-text {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3px;
+  color: #fff;
+
+  text-shadow:
+    0 0 5px var(--neon-primary),
+    0 0 10px var(--neon-primary),
+    0 0 20px var(--neon-primary),
+    0 0 40px var(--neon-secondary);
+
+  animation: neon-flicker 2.5s infinite alternate;
+}
+
+.neon-subtext {
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.body-text {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  color: #bdbdbd; /* opcional */
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.text-muted {
+  color: #bdbdbd;
+}
+
+.text-readable {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+.btn-font {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+/* =========================
+   ⚡ BOTONES
+========================= */
+.neon-btn {
+  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary));
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+
+  box-shadow:
+    0 0 5px var(--neon-primary),
+    0 0 10px var(--neon-primary);
+
+  transition: 0.3s ease;
+}
+
+.neon-btn:hover {
+  transform: scale(1.05);
+
+  box-shadow:
+    0 0 10px var(--neon-primary),
+    0 0 20px var(--neon-primary),
+    0 0 40px var(--neon-secondary);
+}
+
+.neon-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================
+   💎 CARDS
+========================= */
+.neon-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+
+  border: 1px solid rgba(255,60,0,0.2);
+  transition: 0.3s ease;
+}
+
+.neon-card:hover {
+  border: 1px solid var(--neon-primary);
+
+  box-shadow:
+    0 0 10px rgba(255,60,0,0.4),
+    0 0 20px rgba(255,60,0,0.3);
+}
+
+
+/* =========================
+   ✏️ INPUTS / FORM
+========================= */
+.neon-input {
+  background: var(--bg-soft);
+  border: 1px solid #333;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.neon-input:focus {
+  outline: none;
+  border: 1px solid var(--neon-primary);
+
+  box-shadow:
+    0 0 5px var(--neon-primary),
+    0 0 10px var(--neon-primary);
+}
+
+
+/* =========================
+   🧭 NAVBAR
+========================= */
+.navbar {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--neon-primary);
+  text-shadow: 0 0 8px var(--neon-primary);
+}
+
+
+/* =========================
+   ✨ HOVER GLOBAL
+========================= */
+.neon-hover:hover {
+  color: var(--neon-primary);
+  text-shadow: 0 0 10px var(--neon-primary);
+}
+
+
+/* =========================
+   ⚡ OVERLAY (para sidebar)
+========================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1500;
+}
+
+
+/* =========================
+   🔥 ANIMACIÓN NEÓN
+========================= */
+@keyframes neon-flicker {
+  0% {
+    text-shadow:
+      0 0 5px var(--neon-primary),
+      0 0 10px var(--neon-primary);
+  }
+
+  50% {
+    opacity: 0.85;
+    text-shadow:
+      0 0 2px var(--neon-primary);
+  }
+
+  100% {
+    text-shadow:
+      0 0 15px var(--neon-secondary),
+      0 0 30px var(--neon-primary);
+  }
+}
+
+
+/* =========================
+   📱 UTILIDADES
+========================= */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
