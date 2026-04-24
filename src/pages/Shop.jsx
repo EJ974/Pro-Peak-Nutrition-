@@ -38,6 +38,22 @@ function Shop({ cart, setCart }) {
   };
 
   /* =========================
+     FILTROS ACTIVOS
+  ========================= */
+  const hayFiltrosActivos =
+    categoria !== "todos" ||
+    objetivo !== "todos" ||
+    precioMax < 30000 ||
+    orden !== "default";
+
+  const limpiarFiltros = () => {
+    setCategoria("todos");
+    setObjetivo("todos");
+    setPrecioMax(30000);
+    setOrden("default");
+  };
+
+  /* =========================
      FILTRADO
   ========================= */
   let productosFiltrados = productos.filter((p) => {
@@ -64,13 +80,11 @@ function Shop({ cart, setCart }) {
   }
 
   /* =========================
-     🛒 AGREGAR AL CARRITO (FIX REAL)
+     🛒 AGREGAR AL CARRITO
   ========================= */
   const handleAddToCart = (producto, e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    console.log("CLICK FUNCIONA", producto); // 👈 DEBUG CLAVE
 
     const rect = e.currentTarget.getBoundingClientRect();
 
@@ -97,10 +111,9 @@ function Shop({ cart, setCart }) {
     setTimeout(() => setFlyingItem(null), 800);
   };
 
-  useEffect(() => {
-    console.log("🛒 CART ACTUAL:", cart);
-  }, [cart]);
-
+  /* =========================
+     RENDER
+  ========================= */
   return (
     <section className="shop">
 
@@ -148,6 +161,7 @@ function Shop({ cart, setCart }) {
                 </button>
               )}
 
+              {/* CATEGORÍAS */}
               <div className="sidebar-block">
                 <h3>Categorías</h3>
                 <ul>
@@ -158,6 +172,45 @@ function Shop({ cart, setCart }) {
                   <li onClick={() => aplicarFiltro(() => setCategoria("quemadores"))}>Quemadores</li>
                 </ul>
               </div>
+
+              {/* OBJETIVO */}
+              <div className="sidebar-block">
+                <h3>Objetivo</h3>
+                <ul>
+                  <li onClick={() => aplicarFiltro(() => setObjetivo("todos"))}>Todos</li>
+                  <li onClick={() => aplicarFiltro(() => setObjetivo("volumen"))}>Volumen</li>
+                  <li onClick={() => aplicarFiltro(() => setObjetivo("definicion"))}>Definición</li>
+                  <li onClick={() => aplicarFiltro(() => setObjetivo("energia"))}>Energía</li>
+                </ul>
+              </div>
+
+              {/* PRECIO */}
+              <div className="sidebar-block">
+                <h3>Precio máximo</h3>
+                <input
+                  type="range"
+                  min="0"
+                  max="30000"
+                  value={precioMax}
+                  onChange={(e) => setPrecioMax(e.target.value)}
+                />
+                <p>${precioMax}</p>
+              </div>
+
+              {/* ORDEN */}
+              <div className="sidebar-block">
+                <h3>Ordenar</h3>
+                <select
+                  value={orden}
+                  onChange={(e) => aplicarFiltro(() => setOrden(e.target.value))}
+                >
+                  <option value="default">Por defecto</option>
+                  <option value="precio-asc">Precio menor a mayor</option>
+                  <option value="precio-desc">Precio mayor a menor</option>
+                  <option value="vendidos">Más vendidos</option>
+                </select>
+              </div>
+
             </motion.aside>
           )}
         </AnimatePresence>
@@ -166,11 +219,50 @@ function Shop({ cart, setCart }) {
         <div className="shop-content">
           <h1 className="shop-title neon-text">Nuestra Tienda</h1>
 
+          {/* 🔥 FILTROS ACTIVOS */}
+          {hayFiltrosActivos && (
+            <div className="active-filters">
+
+              {categoria !== "todos" && (
+                <span className="filter-chip">
+                  {categoria}
+                  <button onClick={() => setCategoria("todos")}>✕</button>
+                </span>
+              )}
+
+              {objetivo !== "todos" && (
+                <span className="filter-chip">
+                  {objetivo}
+                  <button onClick={() => setObjetivo("todos")}>✕</button>
+                </span>
+              )}
+
+              {precioMax < 30000 && (
+                <span className="filter-chip">
+                  hasta ${precioMax}
+                  <button onClick={() => setPrecioMax(30000)}>✕</button>
+                </span>
+              )}
+
+              {orden !== "default" && (
+                <span className="filter-chip">
+                  {orden}
+                  <button onClick={() => setOrden("default")}>✕</button>
+                </span>
+              )}
+
+              <button className="clear-filters" onClick={limpiarFiltros}>
+                Limpiar filtros
+              </button>
+
+            </div>
+          )}
+
+          {/* GRID */}
           <div className="shop-grid">
             {productosFiltrados.map((producto) => (
               <div key={producto.id} className="shop-card">
 
-                {/* SOLO LA IMAGEN Y TEXTO NAVEGAN */}
                 <Link to={`/producto/${producto.id}`}>
                   <div className="image-container">
                     <img src={producto.imagen} alt={producto.nombre} />
@@ -182,7 +274,6 @@ function Shop({ cart, setCart }) {
 
                 <p className="price neon-text">${producto.precio}</p>
 
-                {/* 🔥 BOTÓN FUERA DEL LINK */}
                 <button
                   type="button"
                   className="shop-btn btn-font"
