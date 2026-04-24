@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import "./CTA.css";
 
 function CTA() {
+  const navigate = useNavigate();
+
   return (
     <section className="cta neon-text">
 
@@ -38,6 +41,7 @@ function CTA() {
 
         <motion.button
           className="cta-btn neon-text"
+          onClick={() => navigate("/tienda")}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}

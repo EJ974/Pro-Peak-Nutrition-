@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import "./Footer.css";
 
@@ -41,9 +42,22 @@ function Footer() {
         {/* LINKS */}
         <motion.div className="footer-col neon-text" variants={item}>
           <h3>Secciones</h3>
-          <a href="/">Inicio</a>
-          <a href="/tienda">Tienda</a>
-          <a href="/contacto">Contacto</a>
+
+          <Link 
+            to="/"
+            onClick={() => {
+              setTimeout(() => {
+                document.getElementById("hero")?.scrollIntoView({
+                  behavior: "smooth"
+                });
+              }, 100);
+            }}
+          >
+            Inicio
+          </Link>
+          <Link to="/tienda">Tienda</Link>
+          <Link to="/contacto">Contacto</Link>
+
         </motion.div>
 
         {/* CONTACTO */}

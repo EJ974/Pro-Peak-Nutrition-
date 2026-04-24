@@ -43,7 +43,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="hero">
+    <section id="hero" className="hero">
 
       <AnimatePresence mode="wait">
         <motion.div
